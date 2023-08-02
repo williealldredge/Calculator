@@ -1,7 +1,5 @@
 * {
     display: flex;
-    margin: auto;
-    width: 300px;
     justify-content: center;
 
 }
@@ -14,9 +12,21 @@
     justify-content: right;
     align-items: end;
     border-radius: 10px ;
+    flex-direction: column;
+}
+
+.previous {
+    height: 30px;
+    align-items: center;
+}
+
+.current {
+    height: 30px;
+    align-items: end;
 }
 
 .buttons {
+    
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
@@ -27,7 +37,7 @@
 }
 
 button {
-    margin: 20px;
+    margin: 18px;
     width: 40px;
     height: 40px;
     align-items: center;
@@ -35,5 +45,5 @@ button {
 }
 
 #zero {
-    flex: .8;
+    flex: 1;
 }
