@@ -1,62 +1,71 @@
 let a = "";
 let b = "";
 let operator = "";
+
 const numberButton = document.querySelectorAll(".number");
-const clearButton = document.querySelectorAll(".clear");
+const clearButton = document.querySelector(".clear");
 const operatorButton = document.querySelectorAll(".operator");
-const currentScreen = document.querySelector(".current");
-const previousScreen = document.querySelector(".previous");
+const bottomScreen = document.querySelector(".current");
+const topScreen = document.querySelector(".previous");
 const equalsButton = document.querySelector(".equals");
 
 
+clearButton.addEventListener("click", () => {
+    bottomScreen.innerHTML = '';
+    topScreen.innerHTML = '';
+    a = '';
+    b = '';
+})
+
 numberButton.forEach((number) => {
     number.addEventListener("click", () => {
-        a = number.innerText;
-        currentScreen.innerHTML += a;
+        num = number.innerText;
+        bottomScreen.innerHTML += num;
+        a = bottomScreen.innerHTML;
+       
     })
 })
 
 operatorButton.forEach((op) => {
     op.addEventListener("click", () => {
         operator = op.innerText;
-        previousScreen.innerHTML = currentScreen.innerText;
-        currentScreen.innerHTML = b;
+        topScreen.innerHTML = bottomScreen.innerText;
+        bottomScreen.innerHTML = b;
+
     })
 })
 
 equalsButton.addEventListener("click", () => {
-    b = previousScreen.innerHTML;
-    a = currentScreen.innerHTML;
-    operate(a, b, operator)
-    console.log(operate(a, b, operator))
 
-    const result = operate(a, b, operator)
-    currentScreen.innerHTML = result;
-    let problem = b + ' ' + operator + ' ' + a;
-    console.log(problem)
-    previousScreen.innerHTML = problem;
+    b = Number(topScreen.innerHTML);
+    a = Number(bottomScreen.innerHTML);
+    
+    const problem = b + ' ' + operator + ' ' + a;
+    topScreen.innerHTML = problem;
+
+    const result = operate(a, b, operator);
+    bottomScreen.innerHTML = result;
+
+    a = result;
+    b = '';
+
 })
 
-
-
-
-
 const operate = (a, b, operator) => {
-   if (operator == "+"){
+   if (operator === "+"){
     return add(a, b);
-   } else if(operator == "-"){
-    return subtract(a, b);
-   } else if (operator == "*"){
+   } else if(operator === "-"){
+    return subtract(b, a);
+   } else if (operator === "*"){
     return multiply(a, b);
-   } else if (operator == "/"){
-    return (divide(a, b));
+   } else if (operator === "/"){
+    return (divide(b, a));
    }
    
 }
 
-
 const add = (a, b) => {
-    return a + b;
+    return b + a;
 }
 
 const subtract = (a, b) => {
