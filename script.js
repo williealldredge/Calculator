@@ -8,9 +8,19 @@ const operatorButton = document.querySelectorAll(".operator");
 const bottomScreen = document.querySelector(".current");
 const topScreen = document.querySelector(".previous");
 const equalsButton = document.querySelector(".equals");
+const boobsButton = document.querySelector(".boobs");
+const allClear = document.querySelector(".allClear");
 
+boobsButton.addEventListener("click", () => {
+    topScreen.innerHTML = '1 70113';
+    bottomScreen.innerHTML = '80085'
+})
 
 clearButton.addEventListener("click", () => {
+    bottomScreen.innerHTML = '';
+})
+
+allClear.addEventListener("click", () => {
     bottomScreen.innerHTML = '';
     topScreen.innerHTML = '';
     a = '';
@@ -22,7 +32,6 @@ numberButton.forEach((number) => {
         num = number.innerText;
         bottomScreen.innerHTML += num;
         a = bottomScreen.innerHTML;
-       
     })
 })
 
@@ -31,52 +40,28 @@ operatorButton.forEach((op) => {
         operator = op.innerText;
         topScreen.innerHTML = bottomScreen.innerText;
         bottomScreen.innerHTML = b;
-
     })
 })
 
 equalsButton.addEventListener("click", () => {
-
     b = Number(topScreen.innerHTML);
     a = Number(bottomScreen.innerHTML);
-    
     const problem = b + ' ' + operator + ' ' + a;
     topScreen.innerHTML = problem;
-
     const result = operate(a, b, operator);
     bottomScreen.innerHTML = result;
-
     a = result;
     b = '';
-
 })
 
 const operate = (a, b, operator) => {
-   if (operator === "+"){
-    return add(a, b);
-   } else if(operator === "-"){
-    return subtract(b, a);
-   } else if (operator === "*"){
-    return multiply(a, b);
-   } else if (operator === "/"){
-    return (divide(b, a));
-   }
-   
+    switch(operator) {
+    case "+": return b + a;  
+    case "-": return b - a;
+    case "*": return b * a;
+    case "/": return b / a;
+    default: return "";
+    }
 }
 
-const add = (a, b) => {
-    return b + a;
-}
-
-const subtract = (a, b) => {
-    return a - b;
-}
-
-const multiply = (a, b) => {
-    return a * b;
-}
-
-const divide = (a, b) => {
-    return a / b;
-}
 
